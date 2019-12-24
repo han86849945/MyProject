@@ -17,7 +17,7 @@ public class InitBeanFactoryListener implements ServletContextListener{
 	public void contextInitialized(ServletContextEvent arg0) {
 		//初始化beanfactory
 		BeanFacotory bf = BeanFacotory.getBeanFacotory();
-		arg0.getServletContext().setAttribute("beanFacotory", bf);
+		arg0.getServletContext().setAttribute("beanFactory", bf);
 	}
 
 }

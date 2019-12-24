@@ -5,9 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.Exception.NoSuchBeanException;
-import com.annotation.MyComponent;
-import com.di.core.DependencyInjection;
-import com.di.query.Query;
+import com.di.DependencyInjection;
 
 public class BeanFacotory {
 	
@@ -35,10 +33,10 @@ public class BeanFacotory {
 			di.dependencyInjection(BeanFacotoryInstance.beanMap);
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
+		} 
 	}
 	
-	public Object getObj(String key) throws NoSuchBeanException{
+	public static Object getObj(String key) throws NoSuchBeanException{
 		Object obj = BeanFacotoryInstance.beanMap.get(key);
 		if(obj == null)
 			throw new NoSuchBeanException("没有找到...");
@@ -47,21 +45,13 @@ public class BeanFacotory {
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public Object getObj(Class clazz) throws NoSuchBeanException{
+	public static Object getObj(Class clazz) throws NoSuchBeanException{
 		for(String key : BeanFacotoryInstance.beanMap.keySet()){
 			Object obj = BeanFacotoryInstance.beanMap.get(key);
 			if(clazz.isInstance(obj))
 				return obj;
 		}
 		throw new NoSuchBeanException("没有找到...");
-	}
-	
-	public Object find(Object key, Query query){
-		return query.find(key, BeanFacotoryInstance.beanFacotory);
-	}
-	
-	public Map<String, Object> getBeanMap(){
-		return BeanFacotoryInstance.beanMap;
 	}
 	
 	

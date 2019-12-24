@@ -1,4 +1,4 @@
-package com.di.core;
+package com.di;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -28,7 +28,7 @@ public class DependencyInjection {
 			for(int j=0;j<as.length;j++){
 				Annotation a = as[j];
 				if(a instanceof AutoWare){
-					field.set(obj, BeanFacotory.getBeanFacotory().getObj(field.getType()));
+					field.set(obj, BeanFacotory.getObj(field.getType()));
 				}
 			}
 		}
