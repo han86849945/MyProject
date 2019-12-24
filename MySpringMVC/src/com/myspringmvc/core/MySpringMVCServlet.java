@@ -38,7 +38,7 @@ public class MySpringMVCServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException{
     	System.out.println("MySpringMVCServlet init ...");
     	HanleFactory hf = HanleFactory.getHanleFactory();
-    	hf.init(((BeanFacotory)config.getServletContext().getAttribute("beanFacotory")).getBeanMap());
+    	hf.init(((BeanFacotory)config.getServletContext().getAttribute("beanFactory")).getBeanMap());
     }
 
 	/**
