@@ -12,6 +12,12 @@ import org.objectweb.asm.MethodAdapter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Type;
 
+/**
+ * 依赖asm-3.3.1.jar包实现的功能
+ * 实现参数的注入
+ * 主要是解析class文件，返回class文件中，方法的参数名称。java本身通过反射是不能获取名字的，只能取到类型
+ * @author hanxu
+ */
 public class AsmUtil {
 	
 	// 拿到指定的Method的入参名们（返回数组，按照顺序返回）
@@ -23,12 +29,9 @@ public class AsmUtil {
         final boolean isStatic = Modifier.isStatic(method.getModifiers());
         final String[] methodParametersNames = new String[methodParameterCount];
 
-
         // 使用org.objectweb.asm.ClassReader来读取到此方法
-        System.out.println(className);
         ClassReader cr = new ClassReader(AsmUtil.class.getClassLoader().getResourceAsStream(className.replace('.', '/') + ".class"));
         ClassWriter cw = new ClassWriter(ClassWriter.COMPUTE_MAXS);
-
 
         // 这一步是最红要的，开始visitor浏览了
         // ClassAdapter是org.objectweb.asm.ClassVisitor的子类~~~~

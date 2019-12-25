@@ -5,8 +5,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.annotation.MyRequestMappring;
-import com.myspringmvc.util.AsmUtil;
+import com.myspringmvc.annotation.MyRequestMappring;
 
 public class HanleFactory {
 	
@@ -14,14 +13,14 @@ public class HanleFactory {
 	
 	public static class HanleFactoryInstance{
 		public static final HanleFactory hf = new HanleFactory();
-		public static final Map<String, HandleBean> handleMap = new HashMap<String, HandleBean>();
+		public static final Map<String, Handle> handleMap = new HashMap<String, Handle>();
 	}
 	
 	public static HanleFactory getHanleFactory(){
 		return HanleFactoryInstance.hf;
 	}
 	
-	public static HandleBean getMethod(String key){
+	public static Handle getMethod(String key){
 		return HanleFactoryInstance.handleMap.get(key);
 	}
 	
@@ -44,11 +43,11 @@ public class HanleFactory {
 							if(a2 instanceof MyRequestMappring){
 								methoduri = ((MyRequestMappring) a2).value();
 								System.out.println(classuri+methoduri);
-								HandleBean hb = new HandleBean();
-								hb.setM(m);
-								hb.setObj(obj);
+								Handle hd = new Handle();
+								hd.setM(m);
+								hd.setObj(obj);
 //								hb.setParamNames(AsmUtil.getMethodParamNames(m));
-								HanleFactoryInstance.handleMap.put(classuri+methoduri, hb);
+								HanleFactoryInstance.handleMap.put(classuri+methoduri, hd);
 								break;
 							}
 						}

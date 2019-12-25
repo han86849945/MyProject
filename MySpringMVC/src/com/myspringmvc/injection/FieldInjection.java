@@ -2,14 +2,11 @@ package com.myspringmvc.injection;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.myspringmvc.handle.HandleBean;
+import com.myspringmvc.handle.Handle;
 import com.myspringmvc.util.AsmUtil;
 
 /**
@@ -18,19 +15,17 @@ import com.myspringmvc.util.AsmUtil;
  */
 public class FieldInjection {
 	
-	public static Object[] injection(HttpServletRequest request, HttpServletResponse response, HandleBean hb){
-		Method method = hb.getM();
+	@SuppressWarnings("rawtypes")
+	public static Object[] injection(HttpServletRequest request, HttpServletResponse response, Handle hd){
+		Method method = hd.getM();
 		Class[] clases = method.getParameterTypes();
 		Object[] objs = new Object[clases.length];
 		String[] paramnames = new String[clases.length];
 		try {
 			paramnames = AsmUtil.getMethodParamNames(method);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		Map<Integer, Object> paramMap = new HashMap<Integer, Object>();
 		
 		//是否需要request和response
 		for (int i=0;i<clases.length;i++) {
