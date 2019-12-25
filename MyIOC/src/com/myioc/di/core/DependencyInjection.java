@@ -10,6 +10,7 @@ import com.myioc.ioc.BeanFacotory;
 
 /**
  * 在beanFactory初始化完成后，完成实例相关成员变量的注入，成员变量的注入对象 ，依旧是在beanFactory中查找
+ * 只注入public的成员变量
  * @author hanxu
  */
 public class DependencyInjection {
